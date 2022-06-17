@@ -4,30 +4,23 @@ pipeline {
       yaml '''
         apiVersion: v1
         kind: Pod
-        metadata:
-          labels:
-            example-label: foo
         spec:
           containers:
-          - name: maven
-            image: maven:alpine
-            command:
-            - cat
-            tty: true
           - name: busybox
             image: busybox
             command:
             - cat
             tty: true
+            resources:
+              requests:
+                memory: "2Gi"
+                cpu: "1000m"
         '''
     }
   }
   stages {
-    stage('Run maven') {
+    stage('Run') {
       steps {
-        container('maven') {
-          sh 'mvn -version'
-        }
         container('busybox') {
           sh '/bin/busybox'
         }
