@@ -13,7 +13,7 @@ pipeline {
             tty: true
             resources:
               requests:
-                memory: "2Gi"
+                memory: "1500Mi"
                 cpu: "1000m"
         '''
     }
